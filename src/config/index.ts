@@ -39,13 +39,20 @@ export const routes: Array<RouteItem> = [
     },
     {
         key: "router-login",
-        title: "Login",
-        tooltip: "Login",
+        title: "login",
+        tooltip: "login",
         path: "/login",
         enabled: true,
         component: Login,
-        icon: DashboardIcon
     },
+    {
+        key: "router-logout",
+        title: "logout",
+        tooltip: "logout",
+        path: "/logout",
+        enabled: true,
+        component: Home,
+    }
     // {
     //     key: "router-gh",
     //     title: "GitHub",

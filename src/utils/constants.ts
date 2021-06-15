@@ -1,5 +1,5 @@
 // APP TEXT
-export const APP_TITLE = "Welcome, You!"
+export const APP_TITLE = "QUIZ APP"
 export const FOOTER_TEXT = `${new Date().getFullYear()} Built with ♡ by Welcome, Nancy`
 // PAGES TITLE
 export const PAGE_TITLE_HOME = "Quiz App"

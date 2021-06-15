@@ -13,9 +13,13 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import UserIcon from "@material-ui/icons/AccountCircle";
+import DashboardIcon from '@material-ui/icons/BarChartOutlined';
+import Login from '../../views/Login';
 
 // constants
 import { APP_TITLE, DRAWER_WIDTH } from "../../utils/constants";
+
+import ChildHeader from "./ChildHeader";
 
 // define css-in-js
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,8 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }),
     },
     appBarShift: {
-      marginLeft: DRAWER_WIDTH,
-      width: `calc(100% - ${DRAWER_WIDTH}px)`,
+      width: `calc(100%)`,
       transition: theme.transitions.create(["width", "margin"], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -53,6 +56,12 @@ const useStyles = makeStyles((theme: Theme) =>
     hide: {
       display: "none",
     },
+    listItemDisabled: {
+      cursor: "not-allowed",
+    },
+    link: {
+      margin: theme.spacing(1, 1.5),
+    },
   })
 );
 
@@ -64,6 +73,7 @@ interface Props {
   useDefaultTheme: boolean;
 }
 
+
 const Header: FC<Props> = ({
   open,
   handleMenuOpen,
@@ -71,6 +81,7 @@ const Header: FC<Props> = ({
   useDefaultTheme,
 }): ReactElement => {
   const classes = useStyles();
+
   return (
     <>
       <CssBaseline />
@@ -99,6 +110,9 @@ const Header: FC<Props> = ({
               {APP_TITLE}
             </Typography>
           </div>
+          
+            <ChildHeader/>  
+              
           <IconButton onClick={toggleTheme}>
             {useDefaultTheme ? (
               <Tooltip title="Switch to dark mode" placement="bottom">
@@ -110,10 +124,12 @@ const Header: FC<Props> = ({
               </Tooltip>
             )}
           </IconButton>
+
           <IconButton size="small" color="inherit">
-            <UserIcon />
+            <UserIcon />        
           </IconButton>
-        </Toolbar>
+
+        </Toolbar>       
       </AppBar>
     </>
   );

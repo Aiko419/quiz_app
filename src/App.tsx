@@ -23,6 +23,10 @@ import { APP_TITLE } from "./utils/constants";
 // interfaces
 import RouteItem from "./models/RouteItem.model";
 
+import Page404 from "./views/Page404";
+
+import Page403 from "./views/Page403";
+
 // define app context
 const AppContext = React.createContext(null);
 
@@ -30,6 +34,8 @@ const AppContext = React.createContext(null);
 const DefaultComponent: FC<{}> = (): ReactElement => (
   <div>{`No Component Defined.`}</div>
 );
+
+
 
 function App() {
   const [useDefaultTheme, toggle] = useReducer((theme) => !theme, true);
@@ -45,10 +51,11 @@ function App() {
       </Helmet>
       <AppContext.Provider value={null}>
         <ThemeProvider theme={theme}>
-          <Router>
-            <Switch>
+            {/* for each route config, a react route is created */}
+            <Router>
+              <Switch>
               <Layout toggleTheme={toggle} useDefaultTheme={useDefaultTheme}>
-                {/* for each route config, a react route is created */}
+              
                 {routes.map((route: RouteItem) => (
                   route.subRoutes ? route.subRoutes.map((item: RouteItem) => (
                     <Route
@@ -57,6 +64,7 @@ function App() {
                       component={item.component || DefaultComponent}
                       exact
                     />
+
                   )) :
                     <Route
                       key={`${route.key}`}
@@ -65,9 +73,12 @@ function App() {
                       exact
                     />
                 ))}
-              </Layout>
-            </Switch>
-          </Router>
+                </Layout>
+                </Switch>
+              </Router>  
+            
+                
+                     
         </ThemeProvider>
       </AppContext.Provider>
     </>
