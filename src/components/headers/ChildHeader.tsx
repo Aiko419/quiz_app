@@ -1,15 +1,7 @@
 import React, { FC, ReactElement } from "react";
-import clsx from "clsx";
-
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import { Link, Router, Switch, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-// app routes
-import { routes } from "../../config/childmenu";
-// interfaces
-import RouteItem from "../../models/RouteItem.model";
-
-// define css-in-js
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     selected: {
@@ -55,9 +47,9 @@ const ChildHeader = () => {
         to="/quizapp"
         style={{ textDecoration: "none", color: "inherit" }}
         key="quizapp"
-        c={classes.link}
+        className={classes.link}
           >
-        quizapp         
+        Quiz         
           </Link>
 
       {!loggedInUser ? (
@@ -66,7 +58,7 @@ const ChildHeader = () => {
           style={{ textDecoration: "none", color: "inherit" }}
           key="login"
           onClick={handleNavigate}
-          c={classes.link}>
+          className={classes.link}>
           Login
         </Link>
       ) : (
@@ -75,7 +67,7 @@ const ChildHeader = () => {
           style={{ textDecoration: "none", color: "inherit" }}
           key="logout"
           onClick={handleLogout}
-          c={classes.link}>
+          className={classes.link}>
           LogOut
         </Link>
       )}

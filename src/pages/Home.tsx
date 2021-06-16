@@ -8,6 +8,10 @@ import PageTitle from "../components/page-titles/PageTitle";
 // constants
 import { APP_TITLE, PAGE_TITLE_HOME } from "../utils/constants";
 
+//import image
+import QuizImage from '../image/quiz.png';
+import Grid from "@material-ui/core/Grid";
+
 // define css-in-js
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,21 +21,37 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "row",
       justifyContent: "space-between",
     },
+    image: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
   })
 );
 
 const Home: FC<{}> = (): ReactElement => {
   const classes = useStyles();
+
+
   return (
     <>
+
       <Helmet>
         <title>
           {PAGE_TITLE_HOME} | {APP_TITLE}
         </title>
       </Helmet>
-      <div className={classes.root}>
-        <PageTitle title={PAGE_TITLE_HOME} />
-      </div>
+
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '80vh' }}
+      >
+        <img src={QuizImage} alt="error-page-found" />
+      </Grid>
     </>
   );
 };

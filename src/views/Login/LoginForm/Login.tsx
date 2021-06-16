@@ -2,6 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import PopupMessage from '../../../components/popup-message/PopupMessage';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +49,7 @@ type Action = { type: 'setUsername', payload: string }
   | { type: 'setIsError', payload: boolean };
 
 const reducer = (state: State, action: Action): State => {
+
   switch (action.type) {
     case 'setUsername': 
       return {
@@ -84,11 +86,12 @@ const reducer = (state: State, action: Action): State => {
   }
 }
 
-const Login = () => {
+const Login: any = () => {
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [open, setOpen] = React.useState(false);
 
-  useEffect(() => {
+  useEffect(() => {    
     if (state.username.trim() && state.password.trim()) {
      dispatch({
        type: 'setIsButtonDisabled',
@@ -104,11 +107,9 @@ const Login = () => {
 
   const handleLogin =  () => {
     if (state.username === 'admin' && state.password === 'admin') {
-      localStorage.setItem("token", "admin");
-      dispatch({
-        type: 'loginSuccess',
-        payload: 'Login Successfully'
-      });          
+      console.log("dsadsad1");
+      localStorage.setItem("token", "admin");     
+      setOpen(true);
     } else {
       dispatch({
         type: 'loginFailed',
@@ -138,8 +139,11 @@ const Login = () => {
         payload: event.target.value
       });
     }
+
   return (
-    <>
+    
+    <>    
+    {open ? <PopupMessage message="Login sucessfully!"/> : null}  
       <form className={classes.form} >
          <TextField
             variant="outlined"
@@ -173,13 +177,13 @@ const Login = () => {
           <Button 
             onClick={handleLogin} 
             disabled={state.isButtonDisabled}  
-            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}>
             Login
           </Button>
+          
       </form>
     </>
   );

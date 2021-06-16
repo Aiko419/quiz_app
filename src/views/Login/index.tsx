@@ -1,21 +1,20 @@
-import * as React from 'react';
-
 import LoginForm from './LoginForm/Login';
-import { Redirect } from "react-router-dom";
+import PopupMessage from '../../components/popup-message/PopupMessage';
+import { LOGGED_USER_WARNING } from '../../utils/constants';
 
 import './styles.scss';
-
-
 
 const LoginPage: any = () => {
   const loggedInUser = localStorage.getItem("token");
   if (loggedInUser) {
-    return (<Redirect to='/' />)
+    return (<PopupMessage message={LOGGED_USER_WARNING}/>)
   };
   return (
-    <div className='wrapper-login-page'>
-      <LoginForm />
-    </div>
+    <>
+      <div className='wrapper-login-page'>
+        <LoginForm />     
+      </div>
+    </>
   )
 }
 
