@@ -29,6 +29,9 @@ function loadQuizResponseReducer(state: QuizState, action: PayloadAction<QuizRes
     state.quizResponse = action.payload;
 }
 
+function clearQuizResponseReducer(state: QuizState, _: PayloadAction<void>){
+    state.quizResponse = undefined;
+}
 
 const { actions, reducer } = createSlice({
     name: 'quiz',
@@ -36,11 +39,12 @@ const { actions, reducer } = createSlice({
     reducers: {
         loadMCQs: loadMCQsReducer,
         loadQuizResponse: loadQuizResponseReducer,
+        clearQuizResponse: clearQuizResponseReducer,
     },
 });
 
 export const {
-    loadQuizResponse
+    loadQuizResponse, clearQuizResponse
 } = actions;
 
 export { reducer as QuizReducer };

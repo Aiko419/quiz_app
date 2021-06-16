@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from "react";
 import clsx from "clsx";
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import { Link, Router, Switch, Route} from "react-router-dom";
+import { Link, Router, Switch, Route } from "react-router-dom";
 
 // app routes
 import { routes } from "../../config/childmenu";
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 // functional component
 const ChildHeader = () => {
   const classes = useStyles();
-  
+
   let loggedInUser = localStorage.getItem("token");
 
   console.log("loggedInUser : " + loggedInUser);
@@ -45,31 +45,40 @@ const ChildHeader = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    loggedInUser=null;
+    loggedInUser = null;
     console.log("loggedInUser : " + loggedInUser);
   };
 
   return (
     <>
-        {!loggedInUser ? (
-          <Link
-            to="/login"
-            style={{ textDecoration: "none", color: "inherit" }}
-            key="login"
-            onClick={handleNavigate}
-            c={classes.link}>
-            Login
+      <Link
+        to="/quizapp"
+        style={{ textDecoration: "none", color: "inherit" }}
+        key="quizapp"
+        c={classes.link}
+          >
+        quizapp         
           </Link>
-        ) : (
-          <Link
-            to="/"
-            style={{ textDecoration: "none", color: "inherit" }}
-            key="logout"
-            onClick={handleLogout}
-            c={classes.link}>
-            LogOut
-          </Link>
-        )}
+
+      {!loggedInUser ? (
+        <Link
+          to="/login"
+          style={{ textDecoration: "none", color: "inherit" }}
+          key="login"
+          onClick={handleNavigate}
+          c={classes.link}>
+          Login
+        </Link>
+      ) : (
+        <Link
+          to="/"
+          style={{ textDecoration: "none", color: "inherit" }}
+          key="logout"
+          onClick={handleLogout}
+          c={classes.link}>
+          LogOut
+        </Link>
+      )}
     </>
   );
 };
