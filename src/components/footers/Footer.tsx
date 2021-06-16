@@ -2,7 +2,7 @@ import React, { ReactElement, FC } from "react";
 
 import { FOOTER_TEXT } from "../../utils/constants";
 
-const Header: FC<any> = (): ReactElement => {
+const Footer: FC<any> = (): ReactElement => {
     return (
         <div>
             FOOTER_TEXT
@@ -10,4 +10,4 @@ const Header: FC<any> = (): ReactElement => {
     );
 };
 
-export default Header;
+export default Footer;

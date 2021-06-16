@@ -18,14 +18,24 @@ export abstract class WebService {
         this.client.interceptors.request.use((config) => this.setHeaders(config));
     }
 
-    protected async get<T = unknown>(url: string): Promise<ApiResult<T>> {
+    protected async get<T = any>(url: string): Promise<ApiResult<T>> {
         const req = this.client.get<ApiResult<T>>(url);
         return this.wrap('get', url, req);
     }
 
-    protected async post<T = unknown>(url: string, data?: unknown): Promise<ApiResult<T>> {
+    protected async getCustom<T = any>(url: string): Promise<T> {
+        const req = this.client.get<T>(url);
+        return this.wrapCustom('get', url, req);
+    }
+
+    protected async post<T = any>(url: string, data?: unknown): Promise<ApiResult<T>> {
         const req = this.client.post<ApiResult<T>>(url, data);
         return this.wrap('post', url, req);
+    }
+
+    protected async postCustom<T = any>(url: string, data?: unknown): Promise<T> {
+        const req = this.client.post<T>(url, data);
+        return this.wrapCustom('post', url, req);
     }
 
     private async wrap<T>(verb: string, url: string, call: Promise<AxiosResponse<ApiResult<T>>>): Promise<ApiResult<T>> {
@@ -57,6 +67,28 @@ export abstract class WebService {
                 code,
                 reason,
             };
+        }
+    }
+
+    private async wrapCustom<T = any>(verb: string, url: string, call: Promise<AxiosResponse<T>>): Promise<T> {
+        verb = verb.toUpperCase();
+        try {
+            const res = await call;
+            debugger;
+            const apiResult = res.data;
+            return apiResult;
+        }
+        catch (err) {
+            const res = err.response;
+            const code = res && res.status;
+            const data = res && res.data;
+            let reason = (data && data.reason) || err.message;
+            if ( code === 500 && typeof data === 'string') {
+                reason = data;
+            }
+
+            console.error(`[${verb} ${url}] ${reason}`);
+            return data;
         }
     }
 

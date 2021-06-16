@@ -7,16 +7,16 @@ import './styles.scss';
 
 
 
-const LoginPage:any = () => {
+const LoginPage: any = () => {
   const loggedInUser = localStorage.getItem("token");
-   if(loggedInUser) {
-     return (<Redirect to='/home'/>)
-    };
-    return (
-        <div className='wrapper-login-page'>
-          <LoginForm />
-        </div>
-    )
+  if (loggedInUser) {
+    return (<Redirect to='/' />)
+  };
+  return (
+    <div className='wrapper-login-page'>
+      <LoginForm />
+    </div>
+  )
 }
 
 

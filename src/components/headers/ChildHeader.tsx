@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from "react";
 import clsx from "clsx";
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import { Link, Router, Switch, Route } from "react-router-dom";
+import { Link, Router, Switch, Route} from "react-router-dom";
 
 // app routes
 import { routes } from "../../config/childmenu";
@@ -25,54 +25,53 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: theme.spacing(2),
     },
     link: {
-        marginLeft: theme.spacing(2),
+      marginLeft: theme.spacing(2),
     },
   })
 );
 // functional component
-const ChildHeader = () =>  {
-    const classes = useStyles();
-
-
-    const loggedInUser = localStorage.getItem("token");
-
-    console.log("loggedInUser : " + loggedInUser);
+const ChildHeader = () => {
+  const classes = useStyles();
   
-    const handleNavigate = (
-      e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-    ): void => {
-        //localStorage.setItem("token", "admin");
-    };
+  let loggedInUser = localStorage.getItem("token");
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        console.log("loggedInUser : " + loggedInUser);
-    };
-  
-    return (
-      <>
-                {!loggedInUser ? (
-                  <Link
-                  to="/login"
-                  style={{ textDecoration: "none", color: "inherit" }}
-                  key="login"
-                  onClick={handleNavigate}
-                  c={classes.link}>
-                    Login
-                  </Link>
-                ):(
-                <Link 
-                to="/logout"
-                style={{ textDecoration: "none", color: "inherit" }}
-                key="logout"
-                onClick={handleLogout}
-                c={classes.link}>
-                LogOut
-                </Link>
-              )}
-      </>
-      
-    );
+  console.log("loggedInUser : " + loggedInUser);
+
+  const handleNavigate = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ): void => {
+    //localStorage.setItem("token", "admin");
   };
-  
-  export default ChildHeader;
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    loggedInUser=null;
+    console.log("loggedInUser : " + loggedInUser);
+  };
+
+  return (
+    <>
+        {!loggedInUser ? (
+          <Link
+            to="/login"
+            style={{ textDecoration: "none", color: "inherit" }}
+            key="login"
+            onClick={handleNavigate}
+            c={classes.link}>
+            Login
+          </Link>
+        ) : (
+          <Link
+            to="/"
+            style={{ textDecoration: "none", color: "inherit" }}
+            key="logout"
+            onClick={handleLogout}
+            c={classes.link}>
+            LogOut
+          </Link>
+        )}
+    </>
+  );
+};
+
+export default ChildHeader;

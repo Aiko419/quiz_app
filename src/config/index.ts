@@ -1,33 +1,21 @@
 // icons
 import HomeIcon from '@material-ui/icons/Home';
 import DashboardIcon from '@material-ui/icons/BarChartOutlined';
-import CodeIcon from '@material-ui/icons/CodeOutlined';
-import SettingsIcon from '@material-ui/icons/SettingsOutlined';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import PrivateIcon from '@material-ui/icons/LockOutlined';
-import PublicIcon from '@material-ui/icons/LockOpenOutlined';
 
 // components
  import Home from '../pages/Home';
  import Dashboard from '../pages/Dashboard';
  import Login from '../views/Login';
+ import Page404 from '../views/Page404';
 
 
 // interface
 import RouteItem from '../models/RouteItem.model';
+import QuizApp from '../views/PageQuiz';
+
 
 // define app routes
 export const routes: Array<RouteItem> = [
-    {
-        key: "router-home",
-        title: "Home",
-        tooltip: "Home",
-        path: "/",
-        enabled: true,
-        component: Home,
-        icon: HomeIcon,
-        appendDivider: true
-    },
     {
         key: "router-dashboard",
         title: "Dashboard",
@@ -38,6 +26,15 @@ export const routes: Array<RouteItem> = [
         icon: DashboardIcon
     },
     {
+        key: "router-home",
+        title: "Home",
+        tooltip: "Home",
+        path: "/home",
+        enabled: true,
+        component: Home,
+        icon: HomeIcon
+    },
+    {
         key: "router-login",
         title: "login",
         tooltip: "login",
@@ -46,12 +43,19 @@ export const routes: Array<RouteItem> = [
         component: Login,
     },
     {
-        key: "router-logout",
-        title: "logout",
-        tooltip: "logout",
-        path: "/logout",
+        key: "router-quizapp",
+        title: "quizapp",
+        tooltip: "quizapp",
+        path: "/quizapp",
         enabled: true,
-        component: Home,
+        component: QuizApp,
+    },
+    {
+        key: "router-40t",
+        title: "40t",
+        tooltip: "40t",
+        path: "/404",
+        enabled: Page404,
     }
     // {
     //     key: "router-gh",
